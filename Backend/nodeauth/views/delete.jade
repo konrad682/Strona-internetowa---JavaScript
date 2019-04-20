@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h2.page-header Print
+    if errors
+        each error, i in errors
+            div.alert.alert-danger #{error.msg}
+    form(method='post', action='/users/delete')
+        .form-group
+            label Delete by email:
+            input.form-control(name='deleteButton', type='text', placeholder='Wpisz email żeby usunąć formularz')
+        input.btn.btn-primary(type='submit', name='submit',value='Delete')

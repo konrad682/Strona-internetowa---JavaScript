@@ -1,0 +1,1 @@
+ db.form.insert({name: 'Konrad', surname: 'Wedzisz',email: 'konrad@xd',city: 'cracow',State: 'Poland', position: 'java', university: 'Agh', Aboutyou: 'im konrad i have 21 years old'});

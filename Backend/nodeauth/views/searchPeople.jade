@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h2.page-header Search
+    p Search position:
+    if errors
+        each error, i in errors
+            div.alert.alert-danger #{error.msg}
+    form(method='post', action='/users/search')
+        .form-group
+            label(for='optionChoose') Wybierz czego szukasz:
+            select#optionChoose.form-control(name='optionChoose')
+                option Position
+                option University
+                option Name
+                option Surname
+
+        .form-group
+            label Wyszukanie:
+            input.form-control(name='value', type='text', placeholder='Czego szukasz ?')
+        input.btn.btn-primary(type='submit', name='submit',value='Search')
+
