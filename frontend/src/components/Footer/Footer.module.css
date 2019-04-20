@@ -1,0 +1,30 @@
+.footer {
+    background-color: #89bbe8;
+    padding: 20px;
+}
+.footer__container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-gap: 60px;
+}
+.links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.logo {
+    display: grid;
+    justify-items: center;
+}
+.logo__caption {
+    text-align: center;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.link:hover {
+    text-decoration: underline;
+    color: black;
+}
