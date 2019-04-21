@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import RegulationsPage from './pages/RegulaionsPage';
 import AuthorPage from './pages/AuthorPage';
 import ContactPage from './pages/ContactPage';
+import RegisterPage from './pages/RegisterPage';
 import ContainerRoute from './components/ContainerRoute/ContainerRoute';
 
 
@@ -22,6 +23,7 @@ class Router extends React.Component {
                     <ContainerRoute path="/regulations" exact component={RegulationsPage} />
                     <ContainerRoute path="/author" exact component={AuthorPage} />
                     <ContainerRoute path="/contact" exact component={ContactPage} />
+                    <ContainerRoute path="/register" exact component={RegisterPage} />
                 </Switch>
             </BrowserRouter>
         );

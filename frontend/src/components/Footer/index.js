@@ -9,7 +9,10 @@ class Footer extends Component {
 
                     <div className={style.footer__container}>
                         <div className={style.logo}>
-                            <img src={logo} alt="logo-mobile" />
+                            <img src={logo} alt="logo-mobile"
+                                 width={100}
+                                 height={100}
+                            />
                             <div className={style.logo__caption}>
                                     <h1>Urząd pracy</h1>
                             </div>
