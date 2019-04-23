@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+const jwt = require('jsonwebtoken');
 var User = require('../models/user');
 var Form = require('../models/form');
 
@@ -8,9 +8,9 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
-});
+// router.get('/', function(req, res, next) {
+//     res.send('respond with a resource');
+// });
 
 router.get('/register', function(req, res, next) {
     res.render('register',{title:'Register'});
@@ -18,9 +18,9 @@ router.get('/register', function(req, res, next) {
 router.get('/delete', function(req, res, next) {
     res.render('delete',{title:'Delete'});
 });
-router.get('/login', function(req, res, next) {
-    res.render('login',{title: 'Login'});
-});
+// router.post('/login', function(req, res, next) {
+//     res.render('login',{title: 'Login'});
+// });
 
 router.get('/search', function(req, res, next) {
     res.render('searchPeople',{title: 'Search'});
@@ -31,10 +31,11 @@ router.get('/form', function(req, res, next) {
 });
 
 router.post('/login',
-    passport.authenticate('local',{failureRedirect:'/users/login', failureFlash: 'Invalid username or password'}),
+    passport.authenticate('local',{failureRedirect:'/login', failureFlash: 'Invalid username or password'}),
     function(req, res) {
-        req.flash('success', 'You are now logged in');
-        res.redirect('/');
+        const token = jwt.sign({id: "12345"}, "secret", { expiresIn: '1h' });
+        res.json({status:"success", message: "user found!!!", data:{token:token}});
+        //req.flash('success', 'You are now logged in');
     });
 
 passport.serializeUser(function(user, done) {
@@ -47,10 +48,14 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
+
+
+
 passport.use(new LocalStrategy(function(username, password, done){
     User.getUserByUsername(username, function(err, user){
         if(err) throw err;
         if(!user){
+            console.log("unknown user");
             return done(null, false, {message: 'Unknown User'});
         }
 
@@ -58,6 +63,7 @@ passport.use(new LocalStrategy(function(username, password, done){
             if(err) return done(err);
             if(isMatch){
                 return done(null, user);
+
             } else {
                 return done(null, false, {message:'Invalid Password'});
             }
@@ -71,23 +77,19 @@ router.post('/register', function(req, res) {
     var email = req.body.email;
     var username = req.body.username;
     var password = req.body.password;
-    var password2 = req.body.password2;
+
 
     req.checkBody('name','Name field is required').notEmpty();
     req.checkBody('email','Email field is required').notEmpty();
     req.checkBody('email','Email is not valid').isEmail();
     req.checkBody('username','Username field is required').notEmpty();
     req.checkBody('password','Password field is required').notEmpty();
-    req.checkBody('password2','Password do not match').equals(req.body.password);
+    req.checkBody('confirmPassword','Password do not match').equals(req.body.password);
 
     var errors = req.validationErrors();
-
-    //console.log(res.body);
-
+    console.log(errors);
     if(errors){
-        res.render('register',{
-            errors: errors
-        });
+        res.json({status:"Error", message: "Problem with data", data: errors});
     } else {
         var newUser = new User({
             name: name,
@@ -98,11 +100,11 @@ router.post('/register', function(req, res) {
         User.createUser(newUser,function (err,user) {
             if(err) throw err;
             console.log(user);
+            res.json({status:"success", message: "user added!!!"});
         });
-        req.flash('success','You are now registered and can login');
-
-        res.location('/users/login');
-        res.redirect('/users/login');
+        // req.flash('success','You are now registered and can login');
+        // res.location('/login');
+        // res.redirect('/login');
 
     }
 
@@ -120,12 +122,6 @@ router.post('/form', function(req, res) {
     var university = req.body.university;
     var position = req.body.position;
     var textarea = req.body.textarea;
-    //var agreementCheckbox = req.body.agreement;
-
-
-    //console.log(req.body);
-    //console.log(req.body.agreement);
-    //console.log(agreementCheckbox);
 
 
     req.checkBody('name1','Name field is required').notEmpty();
@@ -138,7 +134,7 @@ router.post('/form', function(req, res) {
     req.checkBody('textarea','Textarea field is required').notEmpty();
 
     var errors = req.validationErrors();
-
+    console.log(errors);
     if(errors){
         res.render('form',{
             errors: errors
@@ -158,40 +154,45 @@ router.post('/form', function(req, res) {
         Form.createForm(newForm,function (err,form) {
             if(err) throw err;
             console.log(form);
+            res.json({status:"success", message: "Form added!!!"});
         });
 
     req.flash('success','Great');
-
-    res.location('/');
-    res.redirect('/');
     }
 });
 
 
 router.post('/search', function(req, res) {
+        var option = req.body.optionForm;
+        var valueToSearch = req.body.searchText;
 
-        var valueToSearch = req.body.value;
-        var option = req.body.optionChoose;
-       // console.log(option);
-
+        console.log(option);
+        console.log(valueToSearch);
 
         Form.getFormByValue(option,valueToSearch,function(err, form) {
+            console.log("Wyszukiwanie");
+            const tab =[];
         for(var a=0;a<form.length;a++) {
-            req.flash('success', form[a].toString());
+            //req.flash('success', form[a].toString());
+            //res.json({status:"success", message: form[a]});
+            tab.push(form[a]);
+            console.log(form[a].toString());
         }
-            res.location('/users/search');
-            res.redirect('/users/search');
+            res.json({status:"success", message: "Pracownicy added!!!", data: tab});
         });
+
 });
 
 router.post('/delete', function(req, res) {
 
-    var valueToDelete = req.body.deleteButton;
+    var valueToDelete = req.body.valueToDelete;
     console.log(valueToDelete);
 
     Form.DeleteFormByValue(valueToDelete,function(err, form) {
-        res.location('/users/delete');
-        res.redirect('/users/delete');
+
+        res.json({status:"success", message: "Delelte form"});
+        // res.location('/delete');
+        // res.redirect('/delete');
     });
 
 });
@@ -199,7 +200,7 @@ router.post('/delete', function(req, res) {
 router.get('/logout',function (req,res) {
    req.logout();
    req.flash('success','You are now logged out');
-   res.redirect('/users/login');
+   res.redirect('/login');
 });
 
 module.exports = router;

@@ -1,0 +1,37 @@
+.text {
+    padding: 20px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 20px;
+    text-align: justify;
+    color: #000000;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto auto auto auto auto;
+    grid-gap: 100px;
+}
+
+a {
+    color: deepskyblue;
+    text-decoration: none;
+}
+
+
+.submit{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width:  200px;
+    outline: none;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}

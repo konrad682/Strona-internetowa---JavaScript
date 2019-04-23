@@ -17,8 +17,13 @@ var db = mongoose.connection;
 var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var jwt = require('jsonwebtoken');
+
+
 
 var app = express();
+
+app.set('secretKey', 'nodeRestApi'); // jwt secret token
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -68,8 +73,14 @@ app.use(expressValidator({
     }
 }));
 
+app.use(function (req,res,next) {
+   res.header('Access-Control-Allow-Origin',"*");
+   next();
+});
+
 app.use(require('connect-flash')());
 app.use(function (req, res, next) {
+
     res.locals.messages = require('express-messages')(req, res);
     next();
 });
@@ -81,15 +92,15 @@ app.get('*',function(req,res,next){
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    /*err.status = 404;
-    next(createError(404));*/
-
-    res.status(404).send("Sorry cant find this");
-});
+// app.use(function(req, res, next) {
+//     /*err.status = 404;
+//     next(createError(404));*/
+//
+//     res.status(404).send("Sorry cant find this");
+// });
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -99,7 +110,11 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+ // res.render('error');
+});
+
+app.listen(8080, function(){
+    console.log('Node server listening on port 8080');
 });
 
 module.exports = app;

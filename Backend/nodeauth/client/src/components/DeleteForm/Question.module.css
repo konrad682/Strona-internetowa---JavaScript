@@ -1,0 +1,15 @@
+.body {
+
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: Left;
+    border: 2px solid #3c763d;
+    padding: 14px 10px;
+    width:  200px;
+    outline: none;
+    transition: 0.25s;
+    cursor: pointer;
+    padding-top: 2px;
+}

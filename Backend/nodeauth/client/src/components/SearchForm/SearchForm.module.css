@@ -1,0 +1,48 @@
+.submit{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width:  200px;
+    outline: none;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.submit:hover{
+    background: #2ecc71;
+}
+
+.body {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 20px 10px;
+    width:  200px;
+    outline: none;
+    transition: 0.25s;
+    cursor: pointer;
+    padding-top: 10px;
+}
+.text{
+    text-align: center;
+}
+
+.body:focus{
+    width:  350px;
+    border-color: #2ecc71;
+}
+
+.selectbox{
+    margin: 20px auto;
+    border: 2px solid #67b168;
+    padding: 14px 10px;
+    width:  200px;
+}
