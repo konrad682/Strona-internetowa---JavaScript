@@ -14,6 +14,7 @@ import MainPage from './pages/MainPage';
 import FormPage from './pages/FormPage';
 import SearchFormPage from './pages/SearchFormPage';
 import DeleteFormPage from './pages/DeleteFormPage';
+import NotFound from "./components/NotFound/NotFound";
 import ContainerRoute from './components/ContainerRoute/ContainerRoute';
 
 
@@ -32,6 +33,8 @@ class Router extends React.Component {
                     <ContainerRoute path="/form" exact component={FormPage} />
                     <ContainerRoute path="/search" exact component={SearchFormPage} />
                     <ContainerRoute path="/delete" exact component={DeleteFormPage} />
+                    <ContainerRoute path="/delete" exact component={DeleteFormPage} />
+                   <ContainerRoute exact component={NotFound} />
                 </Switch>
             </BrowserRouter>
         );

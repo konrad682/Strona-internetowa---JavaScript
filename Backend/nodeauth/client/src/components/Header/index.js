@@ -3,20 +3,23 @@ import style from './Header.module.css';
 import logo from "../../assets/oksmith-parrot.svg";
 import {Link} from "react-router-dom";
 import {withRouter} from "react-router-dom";
+import {logout,loggedIn} from "../../services/axios";
+
 class Header extends Component {
 
-handleSubmit = () =>{
-    this.props.history.push('/login');
-}
 
 
     constructor(props, context) {
+
         super(props, context);
         this.state = {
-            isLoggedIn: false
+            isLoggedIn: loggedIn()
         }
     }
 
+    handleSubmit = () =>{
+            this.props.history.push('/login');
+    }
 
     render() {
         return (

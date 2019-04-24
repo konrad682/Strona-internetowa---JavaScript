@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import style from'./Login.module.css';
 import { Link } from 'react-router-dom';
-import axios, {setToken} from "../../services/axios";
+import axios, {setToken , getToken,logout,loggedIn} from "../../services/axios";
 import {withRouter} from "react-router-dom";
 import CommunicateError from "../Login/CommunicateError";
+
 class Login extends Component {
 
 
@@ -25,7 +26,12 @@ class Login extends Component {
 
         axios.post('/login', params)
             .then((response) => {
-                setToken(response.data.token)
+                //console.log("Token XD : " + response.data.data.token);
+                setToken(response.data.data.token)
+                //console.log("get token : " + getToken());
+                console.log("loggedIn token : " + loggedIn());
+                //logout();
+              //  login(response.data.token);
                 console.log(response.data)
                 this.setState({error: false, loginEnabled: true});
                 this.props.history.push('/home');
@@ -42,6 +48,7 @@ class Login extends Component {
             })
 
     }
+
 
     operation(){
         this.setState({

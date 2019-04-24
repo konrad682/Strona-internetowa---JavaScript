@@ -5,7 +5,6 @@ import employee from '../../assets/employee.png'
 import login from '../../assets/login.jpg'
 import pytajnik from '../../assets/pytajnik.png'
 
-
 class Home extends Component {
     render() {
         return (

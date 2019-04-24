@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import style from './Main.module.css';
 import {withRouter} from "react-router-dom";
+import axios, {setToken , getToken,logout,loggedIn} from "../../services/axios";
+
 
 class Main extends Component {
 
