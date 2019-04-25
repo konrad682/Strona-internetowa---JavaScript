@@ -19,6 +19,10 @@ class Header extends Component {
 
     handleSubmit = () =>{
             this.props.history.push('/login');
+            if(this.state.isLoggedIn){
+                logout();
+            }
+
     }
 
     render() {

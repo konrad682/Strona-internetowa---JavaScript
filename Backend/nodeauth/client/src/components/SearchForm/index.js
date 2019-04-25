@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import style from './SearchForm.module.css';
-import axios from "../../services/axios";
+import axios, {loggedIn} from "../../services/axios";
+import {withRouter} from "react-router-dom";
 import Question from "./Question";
 class SearchForm extends Component {
 
     constructor(props, context) {
         super(props, context);
-
+        this.checkUserIsLogiIn();
         this.state = {
             optionForm: 'Surname',
             searchText: '',
@@ -18,6 +19,15 @@ class SearchForm extends Component {
        // this.handleChange = this.handleChange.bind(this);
         //this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    checkUserIsLogiIn = () =>{
+        if(!loggedIn()){
+            this.props.history.push('/login');
+        }
+    }
+
+
+
     operation(){
         this.setState({
             showMe: !this.state.showMe
@@ -26,7 +36,7 @@ class SearchForm extends Component {
 
     handleUserInputOption = (evt) => {
 
-        const value = evt.target.value;
+        //const value = evt.target.value;
         this.setState({optionForm: evt.target.value});
 
     }
@@ -130,4 +140,4 @@ class SearchForm extends Component {
         );
     }
 }
-export default SearchForm;
+export default withRouter(SearchForm);

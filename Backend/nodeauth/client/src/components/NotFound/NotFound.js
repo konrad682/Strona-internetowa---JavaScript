@@ -10,8 +10,9 @@ function NotFound() {
                  width={400}
                  height={400}
             />
-            <br />
+            <br /> <br />
             <h1>Not found page</h1>
+            <br /> <br /><br /> <br /><br /> <br />
         </div>
 
             );

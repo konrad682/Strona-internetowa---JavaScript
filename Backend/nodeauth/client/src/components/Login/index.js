@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import style from'./Login.module.css';
 import { Link } from 'react-router-dom';
-import axios, {setToken , getToken,logout,loggedIn} from "../../services/axios";
+import axios, {setToken , loggedIn} from "../../services/axios";
 import {withRouter} from "react-router-dom";
 import CommunicateError from "../Login/CommunicateError";
 
@@ -63,8 +63,15 @@ class Login extends Component {
     }
 
 
+    checkUserIsLogiIn = () =>{
+        if(loggedIn()){
+            this.props.history.push('/home');
+        }
+    }
+
     constructor(props, context) {
         super(props, context);
+        this.checkUserIsLogiIn();
         this.state = {
             username: '',
             password: '',

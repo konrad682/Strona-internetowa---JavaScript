@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import style from'./Form.module.css';
 import axios from "../../services/axios";
 import {withRouter} from "react-router-dom";
+import {loggedIn} from "../../services/axios";
 class Form extends Component {
 
 
@@ -30,7 +31,7 @@ class Form extends Component {
                 console.log("response");
                 console.log(response.data);
                 this.setState({error: false, formComplete: true});
-                this.props.history.push('/mainpage');
+                this.props.history.push('/home');
             })
             .catch((error) => {
 
@@ -43,9 +44,16 @@ class Form extends Component {
             })
 
     }
+    checkUserIsLogiIn = () =>{
+        if(!loggedIn()){
+            this.props.history.push('/login');
+        }
+    }
+
 
     constructor(props, context) {
         super(props, context);
+        this.checkUserIsLogiIn();
         this.state = {
             city: '',
             state: '',

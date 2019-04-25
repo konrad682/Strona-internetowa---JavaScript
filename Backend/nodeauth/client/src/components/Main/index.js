@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import style from './Main.module.css';
 import {withRouter} from "react-router-dom";
-import axios, {setToken , getToken,logout,loggedIn} from "../../services/axios";
+import {loggedIn} from "../../services/axios";
 
 
 class Main extends Component {
-
 
     handleSubmitForm = (evt) => {
         evt.preventDefault();
@@ -23,6 +22,18 @@ class Main extends Component {
         this.props.history.push('/delete');
     }
 
+    checkUserIsLogiIn = () =>{
+        if(!loggedIn()){
+            this.props.history.push('/login');
+        }
+    }
+
+    constructor(props, context) {
+        super(props, context);
+        this.checkUserIsLogiIn();
+    }
+
+
     render() {
         return (
             <div className={style.text}>
@@ -39,7 +50,9 @@ class Main extends Component {
                     </div>
                     <div>
                         <br />
-                        <a> Formularz</a>
+                        <div className={style.color}>
+                         Formularz
+                        </div>
                         <p>
                             Wypełnij formularz aby zostać znalezionym przez innych ! Nie czekaj !
                         </p>
@@ -49,7 +62,9 @@ class Main extends Component {
                     </div>
                     <div>
                         <br />
-                        <a>Znajdź pracownika</a>
+                        <div className={style.color}>
+                            Znajdź pracownika
+                        </div>
                         <p>
                             Już teraz możesz bez wysiłku znaleźć pracownika sortując poprzez odpowiednie kategorie !
                         </p>
@@ -59,7 +74,9 @@ class Main extends Component {
                     </div>
                     <div>
                         <br />
-                        <a>Usunięcie z bazy</a>
+                        <div className={style.color}>
+                            Usunięcie z bazy
+                        </div>
                         <p>
                             Mozliwość usunięcia formularza z bazy !
                         </p>

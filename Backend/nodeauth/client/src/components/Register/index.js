@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import style from'./Register.module.css';
 import { Link } from 'react-router-dom';
-import axios from "../../services/axios";
+import axios, {loggedIn} from "../../services/axios";
 import {withRouter} from "react-router-dom";
 import CommunicateError from "./CommunicateError";
 class Register extends Component {
@@ -64,8 +64,16 @@ class Register extends Component {
         })
     }
 
+    checkUserIsLogiIn = () =>{
+        if(loggedIn()){
+            this.props.history.push('/home');
+        }
+    }
+
+
     constructor(props, context) {
         super(props, context);
+        this.checkUserIsLogiIn();
         this.state = {
             name: '',
             email: '',

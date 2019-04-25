@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import style from'./DeleteForm.module.css';
-import axios from "../../services/axios";
+import axios, {loggedIn} from "../../services/axios";
 import Question from "../DeleteForm/Question";
+import {withRouter} from "react-router-dom";
 class DeleteForm extends Component {
 
 
@@ -38,9 +39,15 @@ class DeleteForm extends Component {
             })
 
     }
+    checkUserIsLogiIn = () =>{
+        if(!loggedIn()){
+            this.props.history.push('/login');
+        }
+    }
 
     constructor(props, context) {
         super(props, context);
+        this.checkUserIsLogiIn();
         this.state = {
             valueToDelete: '',
             showMe: false
@@ -87,4 +94,4 @@ class DeleteForm extends Component {
         );
     }
 }
-export default DeleteForm;
+export default withRouter(DeleteForm);

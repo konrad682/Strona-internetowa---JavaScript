@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from '../Container';
-import Header from '../Header';
+//import Header from '../Header';
 import Footer from '../Footer';
 import { Route } from 'react-router-dom';
 const ContainerRoute = ({ component: Component, ...rest }) => (
@@ -8,7 +8,7 @@ const ContainerRoute = ({ component: Component, ...rest }) => (
         {...rest}
         render={props => (
             <React.Fragment>
-                <Header />
+                {/*<Header  />*/}
                 <Container>
                     <Component {...props} />
                 </Container>

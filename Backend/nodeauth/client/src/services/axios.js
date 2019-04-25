@@ -2,6 +2,7 @@ import axios from 'axios'
 import config from '../config'
 import decode from 'jwt-decode';
 
+
     let instance = axios.create({
         baseURL: config.apiUrl,
     });
@@ -45,12 +46,15 @@ import decode from 'jwt-decode';
         localStorage.removeItem('id_token');
     }
 
-    let getConfirm = () => {
-        // Using jwt-decode npm package to decode the token
-        let answer = decode(getToken());
-        console.log("Recieved answer!");
-        return answer;
-    }
+    // let getConfirm = () => {
+    //     // Using jwt-decode npm package to decode the token
+    //     let answer = decode(getToken());
+    //     console.log("Recieved answer!");
+    //     return answer;
+    // }
+
+
+
 
 export default instance
 export {setToken}

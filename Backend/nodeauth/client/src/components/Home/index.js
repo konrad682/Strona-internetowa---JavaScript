@@ -23,7 +23,9 @@ class Home extends Component {
                     </div>
                     <div>
                         <br />
-                        <a> Do czego służy strona</a>
+                        <div className={style.color}>
+                            Do czego służy strona
+                        </div>
                         <p> Po zalogowaniu się, możesz uzupełnić swój własny formularz dotyczący ciebie. a następnie przesłać go do naszej bazy danych.
                         </p>
                     </div>
@@ -35,7 +37,9 @@ class Home extends Component {
                     </div>
                     <div>
                         <br />
-                        <a>Logowanie/Rejestracja</a>
+                        <div className={style.color}>
+                            Logowanie/Rejestracja
+                        </div>
                         <p>
                             Zarejestrowanie daje mozliwość korzystania ze wszystkich możliwości strony. Po zalogowaniu się możesz uzupełnić formularz, a nastepnie przeglądać formularze osób, które już taki formularz wypełniły.
                         </p>
@@ -48,7 +52,9 @@ class Home extends Component {
                     </div>
                     <div>
                         <br />
-                        <a>Odkryj nowych pracowników</a>
+                        <div className={style.color}>
+                            Odkryj nowych pracowników
+                        </div>
 
                         <p>
                             Po zalogowaniu, możesz poznać wszytskich przyszłych pracowników. Sortuj uzytkowników wsród wszytskich, którzy już złozyli formularz.
@@ -62,7 +68,9 @@ class Home extends Component {
                     </div>
                     <div>
                         <br />
-                        <a>Jeszcze nigdy nie byłeś tak blisko</a>
+                        <div className={style.color}>
+                            Jeszcze nigdy nie byłeś tak blisko
+                        </div>
 
                         <p>
                             Dzięki tej stronie możesz szybko znaleźć pracę. Czekaj tylko jak pracodwaca się odezwie.
